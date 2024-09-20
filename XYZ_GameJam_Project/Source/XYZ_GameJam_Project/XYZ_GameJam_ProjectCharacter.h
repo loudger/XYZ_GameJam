@@ -22,6 +22,12 @@ public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 
+	// Movement
+	virtual void MoveUp();
+	virtual void MoveDown();
+	virtual void MoveRight();
+	virtual void MoveLeft();
+
 private:
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
