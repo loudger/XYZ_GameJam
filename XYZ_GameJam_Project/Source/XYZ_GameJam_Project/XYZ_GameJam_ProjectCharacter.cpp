@@ -49,3 +49,23 @@ void AXYZ_GameJam_ProjectCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
 }
+
+void AXYZ_GameJam_ProjectCharacter::MoveUp()
+{
+	AddMovementInput(FVector::XAxisVector);
+}
+
+void AXYZ_GameJam_ProjectCharacter::MoveDown()
+{
+	AddMovementInput(-FVector::XAxisVector);
+}
+
+void AXYZ_GameJam_ProjectCharacter::MoveRight()
+{
+	AddMovementInput(FVector::YAxisVector);
+}
+
+void AXYZ_GameJam_ProjectCharacter::MoveLeft()
+{
+	AddMovementInput(-FVector::YAxisVector);
+}
