@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "XYZ_GameJam_ProjectCharacter.h"
+
+#include "XYZ_GameJam_ProjectPlayerController.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
 #include "Components/DecalComponent.h"
@@ -52,6 +54,7 @@ void AXYZ_GameJam_ProjectCharacter::Tick(float DeltaSeconds)
 
 void AXYZ_GameJam_ProjectCharacter::MoveUp()
 {
+	
 	AddMovementInput(FVector::XAxisVector);
 }
 
@@ -68,4 +71,52 @@ void AXYZ_GameJam_ProjectCharacter::MoveRight()
 void AXYZ_GameJam_ProjectCharacter::MoveLeft()
 {
 	AddMovementInput(-FVector::YAxisVector);
+}
+
+
+void AXYZ_GameJam_ProjectCharacter::StartFire()
+{
+	MakeShot();
+	if (FireMode == EWeaponFireMode::FullAuto)
+	{
+		GetWorld()->GetTimerManager().ClearTimer(ShotTimer);
+		GetWorld()->GetTimerManager().SetTimer(ShotTimer, this, &AXYZ_GameJam_ProjectCharacter::MakeShot, GetShotTimerInterval(), true);
+	}
+}
+
+void AXYZ_GameJam_ProjectCharacter::StopFire()
+{
+	GetWorld()->GetTimerManager().ClearTimer(ShotTimer);
+}
+
+void AXYZ_GameJam_ProjectCharacter::MakeShot()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Shot."));
+
+	if (!bIsCanShoot)
+	{
+		StopFire();
+	}
+
+	// CharacterOwner->PlayAnimMontage(CharacterFireMontage);
+	// PlayAnimMontage(WeaponFireMontage);
+	
+	AXYZ_GameJam_ProjectPlayerController* CurrentController = GetController<AXYZ_GameJam_ProjectPlayerController>();
+	if (!IsValid(CurrentController))
+		return;
+
+	OnShotEvent();
+
+	// FVector PlayerViewPoint;
+	// FRotator PlayerViewRotation;
+	// Controller->GetPlayerViewPoint(PlayerViewPoint, PlayerViewRotation);
+
+	// FVector ViewDirection = PlayerViewRotation.RotateVector(FVector::ForwardVector);
+	// ViewDirection += GetBulletSpreadOffset(FMath::RandRange(0.0f, GetCurrentBulletSpreadAngle()), PlayerViewRotation);
+	// WeaponBarrelComponent->Shot(PlayerViewPoint, ViewDirection, Controller);
+}
+
+float AXYZ_GameJam_ProjectCharacter::GetShotTimerInterval()
+{
+	return 60.0f / RateOfFire;
 }

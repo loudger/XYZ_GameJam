@@ -31,6 +31,8 @@ protected:
 
 	void MoveUp(float X);
 	void MoveRight(float X);
+	void FireStart();
+	void FireStop();
 
 	
 	TSoftObjectPtr<AXYZ_GameJam_ProjectCharacter> CachedBaseCharacter = nullptr;

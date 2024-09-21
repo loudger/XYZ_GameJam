@@ -31,6 +31,8 @@ void AXYZ_GameJam_ProjectPlayerController::SetupInputComponent()
 
 	InputComponent->BindAxis("MoveUp", this, &AXYZ_GameJam_ProjectPlayerController::MoveUp);
 	InputComponent->BindAxis("MoveRight", this, &AXYZ_GameJam_ProjectPlayerController::MoveRight);
+	InputComponent->BindAction("Fire", IE_Pressed, this, &AXYZ_GameJam_ProjectPlayerController::FireStart);
+	InputComponent->BindAction("Fire", IE_Released, this, &AXYZ_GameJam_ProjectPlayerController::FireStop);
 }
 
 void AXYZ_GameJam_ProjectPlayerController::MoveUp(float X)
@@ -59,6 +61,16 @@ void AXYZ_GameJam_ProjectPlayerController::MoveRight(float X)
 			CachedBaseCharacter->MoveLeft();
 		}
 	}
+}
+
+void AXYZ_GameJam_ProjectPlayerController::FireStart()
+{
+	CachedBaseCharacter->StartFire();
+}
+
+void AXYZ_GameJam_ProjectPlayerController::FireStop()
+{
+	CachedBaseCharacter->StopFire();
 }
 
 
