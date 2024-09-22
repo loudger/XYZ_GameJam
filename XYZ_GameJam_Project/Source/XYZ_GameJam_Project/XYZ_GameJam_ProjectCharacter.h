@@ -38,7 +38,11 @@ public:
 	virtual void MoveLeft();
 
 	// Fire
+
+	UFUNCTION(BlueprintCallable)
 	void StartFire();
+
+	UFUNCTION(BlueprintCallable)
 	void StopFire();
 	
 	void MakeShot();
@@ -57,7 +61,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon | FireMode")
 	EWeaponFireMode FireMode = EWeaponFireMode::FullAuto;
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "Weapon | Shot")
+	UFUNCTION(BlueprintNativeEvent, Category = "Weapon | Shot") 
 	void OnShotEvent();
 private:
 	// Weapon

@@ -31,7 +31,11 @@ protected:
 
 	void MoveUp(float X);
 	void MoveRight(float X);
+
+	UFUNCTION (BlueprintCallable)
 	void FireStart();
+
+	UFUNCTION(BlueprintCallable)
 	void FireStop();
 
 	

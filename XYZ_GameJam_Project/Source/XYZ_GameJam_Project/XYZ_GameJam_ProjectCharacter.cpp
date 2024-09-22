@@ -93,19 +93,26 @@ void AXYZ_GameJam_ProjectCharacter::MakeShot()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Shot."));
 
+	OnShotEvent();
+	
 	if (!bIsCanShoot)
 	{
 		StopFire();
 	}
 
+	
+
+	
 	// CharacterOwner->PlayAnimMontage(CharacterFireMontage);
 	// PlayAnimMontage(WeaponFireMontage);
 	
-	AXYZ_GameJam_ProjectPlayerController* CurrentController = GetController<AXYZ_GameJam_ProjectPlayerController>();
-	if (!IsValid(CurrentController))
-		return;
+	// AXYZ_GameJam_ProjectPlayerController* CurrentController = GetController<AXYZ_GameJam_ProjectPlayerController>();
+	// if (!IsValid(CurrentController))
+	// {
+	// 	return;
+	// }
 
-	OnShotEvent();
+	
 
 	// FVector PlayerViewPoint;
 	// FRotator PlayerViewRotation;
@@ -114,6 +121,12 @@ void AXYZ_GameJam_ProjectCharacter::MakeShot()
 	// FVector ViewDirection = PlayerViewRotation.RotateVector(FVector::ForwardVector);
 	// ViewDirection += GetBulletSpreadOffset(FMath::RandRange(0.0f, GetCurrentBulletSpreadAngle()), PlayerViewRotation);
 	// WeaponBarrelComponent->Shot(PlayerViewPoint, ViewDirection, Controller);
+}
+
+void AXYZ_GameJam_ProjectCharacter::OnShotEvent_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("BOOM"));
+
 }
 
 float AXYZ_GameJam_ProjectCharacter::GetShotTimerInterval()
