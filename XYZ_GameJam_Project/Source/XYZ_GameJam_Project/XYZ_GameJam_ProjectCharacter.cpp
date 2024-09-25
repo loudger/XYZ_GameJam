@@ -54,7 +54,6 @@ void AXYZ_GameJam_ProjectCharacter::Tick(float DeltaSeconds)
 
 void AXYZ_GameJam_ProjectCharacter::MoveUp()
 {
-	
 	AddMovementInput(FVector::XAxisVector);
 }
 
@@ -76,10 +75,9 @@ void AXYZ_GameJam_ProjectCharacter::MoveLeft()
 
 void AXYZ_GameJam_ProjectCharacter::StartFire()
 {
-	MakeShot();
-	if (FireMode == EWeaponFireMode::FullAuto)
+	if (!GetWorld()->GetTimerManager().IsTimerActive(ShotTimer))
 	{
-		GetWorld()->GetTimerManager().ClearTimer(ShotTimer);
+		MakeShot();
 		GetWorld()->GetTimerManager().SetTimer(ShotTimer, this, &AXYZ_GameJam_ProjectCharacter::MakeShot, GetShotTimerInterval(), true);
 	}
 }
@@ -94,13 +92,6 @@ void AXYZ_GameJam_ProjectCharacter::MakeShot()
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Shot."));
 
 	OnShotEvent();
-	
-	if (!bIsCanShoot)
-	{
-		StopFire();
-	}
-
-	
 
 	
 	// CharacterOwner->PlayAnimMontage(CharacterFireMontage);

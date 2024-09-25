@@ -28,11 +28,10 @@ void AXYZ_GameJam_ProjectPlayerController::SetPawn(APawn* InPawn)
 void AXYZ_GameJam_ProjectPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
-
+	InputComponent->BindAction("Fire", IE_Released, this, &AXYZ_GameJam_ProjectPlayerController::FireStop);
+	InputComponent->BindAction("Fire", IE_Pressed, this, &AXYZ_GameJam_ProjectPlayerController::FireStart);
 	InputComponent->BindAxis("MoveUp", this, &AXYZ_GameJam_ProjectPlayerController::MoveUp);
 	InputComponent->BindAxis("MoveRight", this, &AXYZ_GameJam_ProjectPlayerController::MoveRight);
-	InputComponent->BindAction("Fire", IE_Pressed, this, &AXYZ_GameJam_ProjectPlayerController::FireStart);
-	InputComponent->BindAction("Fire", IE_Released, this, &AXYZ_GameJam_ProjectPlayerController::FireStop);
 }
 
 void AXYZ_GameJam_ProjectPlayerController::MoveUp(float X)
