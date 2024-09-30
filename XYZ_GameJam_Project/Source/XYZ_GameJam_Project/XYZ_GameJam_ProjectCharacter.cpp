@@ -75,6 +75,7 @@ void AXYZ_GameJam_ProjectCharacter::MoveLeft()
 
 void AXYZ_GameJam_ProjectCharacter::StartFire()
 {
+	// GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("TRY."));
 	if (!GetWorld()->GetTimerManager().IsTimerActive(ShotTimer))
 	{
 		MakeShot();
