@@ -75,7 +75,6 @@ void AXYZ_GameJam_ProjectCharacter::MoveLeft()
 
 void AXYZ_GameJam_ProjectCharacter::StartFire()
 {
-	// GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("TRY."));
 	if (!GetWorld()->GetTimerManager().IsTimerActive(ShotTimer))
 	{
 		MakeShot();
@@ -90,8 +89,6 @@ void AXYZ_GameJam_ProjectCharacter::StopFire()
 
 void AXYZ_GameJam_ProjectCharacter::MakeShot()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("Shot."));
-
 	OnShotEvent();
 
 	
@@ -117,8 +114,6 @@ void AXYZ_GameJam_ProjectCharacter::MakeShot()
 
 void AXYZ_GameJam_ProjectCharacter::OnShotEvent_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("BOOM"));
-
 }
 
 float AXYZ_GameJam_ProjectCharacter::GetShotTimerInterval()
